@@ -1,0 +1,162 @@
+             STUDENT MANAGEMENT SYSTEM
+                    ER DIAGRAM
+==================================================
+
++---------------------------+
+|       DEPARTMENTS         |
++---------------------------+
+| PK  department_id         |
+|     department_name       |
+|     department_code       |
+|     office_location       |
++---------------------------+
+              |
+              | 1
+              |
+              | M
+              |
++---------------------------+
+|         COURSES           |
++---------------------------+
+| PK  course_id             |
+|     course_name           |
+|     course_fee            |
+| FK  department_id         |
++---------------------------+
+       |             |
+       | 1           | 1
+       |             |
+       | M           | M
+       |             |
++----------------+  +---------------------------+
+|    SUBJECTS    |  |         STUDENTS          |
++----------------+  +---------------------------+
+| PK subject_id  |  | PK  student_id            |
+|    subject_name|  |     first_name            |
+|    subject_code|  |     last_name             |
+| FK course_id   |  |     age                   |
++----------------+  |     gender                |
+       |             |     phone                 |
+       | 1           |     email                 |
+       |             | FK  course_id             |
+       | M           |     admission_date        |
+       |             |     student_status        |
+       |             +---------------------------+
+       |                        |
+       |                        |
+       |                        | 1
+       |                        |
+       |                        | M
+       |                        |
+       |             +---------------------------+
+       +------------>|           MARKS           |
+                     +---------------------------+
+                     | PK  mark_id               |
+                     | FK  student_id            |
+                     | FK  subject_id            |
+                     |     exam_type             |
+                     |     marks_obtained        |
+                     |     exam_date             |
+                     +---------------------------+
+
+                     +---------------------------+
+                     |        ATTENDANCE         |
+                     +---------------------------+
+                     | PK  attendance_id         |
+                     | FK  student_id            |
+                     |     attendance_date       |
+                     |     attendance_status     |
+                     +---------------------------+
+
+
+RELATIONSHIP SUMMARY
+==================================================
+
+1. DEPARTMENTS (1) ---- (M) COURSES
+2. COURSES     (1) ---- (M) STUDENTS
+3. COURSES     (1) ---- (M) SUBJECTS
+4. STUDENTS    (1) ---- (M) MARKS
+5. SUBJECTS    (1) ---- (M) MARKS
+6. STUDENTS    (1) ---- (M) ATTENDANCE
+
+
+LEGEND
+==================================================
+
+PK = Primary Key
+FK = Foreign Key
+1  = One
+M  = Many
+
+RELATIONSHIP SUMMARY
+==================================================
+
+1. DEPARTMENTS (1) ---- (M) COURSES
+2. COURSES     (1) ---- (M) STUDENTS
+3. COURSES     (1) ---- (M) SUBJECTS
+4. STUDENTS    (1) ---- (M) MARKS
+5. SUBJECTS    (1) ---- (M) MARKS
+6. STUDENTS    (1) ---- (M) ATTENDANCE
+
+
+LEGEND
+==================================================
+
+PK = Primary Key
+FK = Foreign Key
+1  = One
+M  = Many
+
+ADDITIONAL RELATIONSHIPS
+------------------------
+
+DEPARTMENTS (1) -------- (M) COURSES
+    departments.department_id = courses.department_id
+
+COURSES (1) -------- (M) STUDENTS
+    courses.course_id = students.course_id
+
+COURSES (1) -------- (M) SUBJECTS
+    courses.course_id = subjects.course_id
+
+STUDENTS (1) -------- (M) MARKS
+    students.student_id = marks.student_id
+
+SUBJECTS (1) -------- (M) MARKS
+    subjects.subject_id = marks.subject_id
+
+STUDENTS (1) -------- (M) ATTENDANCE
+    students.student_id = attendance.student_id
+
+
+RELATIONSHIP SUMMARY
+--------------------
+
+1. DEPARTMENTS (1) ---- (M) COURSES
+2. COURSES     (1) ---- (M) STUDENTS
+3. COURSES     (1) ---- (M) SUBJECTS
+4. STUDENTS    (1) ---- (M) MARKS
+5. SUBJECTS    (1) ---- (M) MARKS
+6. STUDENTS    (1) ---- (M) ATTENDANCE
+
+
+LEGEND
+------
+
+PK   = Primary Key
+FK   = Foreign Key
+1    = One
+M    = Many
+UNIQUE = Unique Constraint
+
+
+ADDITIONAL TABLES
+-----------------
+
+1. MARKS_AUDIT
+   Stores details of marks INSERT and UPDATE operations.
+   Created for demonstrating database triggers.
+
+2. TRANSACTION_DEMO
+   Used to demonstrate COMMIT, ROLLBACK and SAVEPOINT.
+   Created for transaction practice.

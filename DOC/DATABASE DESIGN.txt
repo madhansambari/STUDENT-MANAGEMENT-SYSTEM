@@ -1,0 +1,303 @@
+DATABASE DESIGN
+STUDENT MANAGEMENT SYSTEM
+
+1. INTRODUCTION
+
+The Student Management System is a relational database project developed using MySQL.
+
+The database is designed to manage student information, department details, course information, subject details, examination marks and student attendance.
+
+The system uses six interconnected tables to organize academic data, maintain relationships and ensure data integrity.
+
+2. DATABASE INFORMATION
+
+Database Name: student_management_system
+Database Management System: MySQL
+Development Tool: MySQL Workbench
+Database Type: Relational Database
+Total Core Tables: 6
+
+3. DATABASE TABLES
+
+TABLE 1: DEPARTMENTS
+
+Purpose:
+Stores department information.
+
+Columns and Constraints:
+
+department_id - INT - Primary Key, Auto Increment
+department_name - VARCHAR(100) - NOT NULL, UNIQUE
+department_code - VARCHAR(20) - NOT NULL, UNIQUE
+office_location - VARCHAR(100) - NULL Allowed
+
+TABLE 2: COURSES
+
+Purpose:
+Stores course information and department associations.
+
+Columns and Constraints:
+
+course_id - INT - Primary Key, Auto Increment
+course_name - VARCHAR(100) - NOT NULL
+course_fee - DECIMAL(10,2) - NOT NULL, CHECK
+department_id - INT - Foreign Key, NOT NULL
+
+Foreign Key:
+department_id references departments(department_id).
+
+Validation:
+Course fee must be greater than or equal to zero.
+
+TABLE 3: STUDENTS
+
+Purpose:
+Stores student personal and academic information.
+
+Columns and Constraints:
+
+student_id - INT - Primary Key, Auto Increment
+first_name - VARCHAR(50) - NOT NULL
+last_name - VARCHAR(50) - NOT NULL
+age - INT - CHECK, NULL Allowed
+gender - VARCHAR(10) - NULL Allowed
+phone - VARCHAR(15) - UNIQUE
+email - VARCHAR(100) - NOT NULL, UNIQUE
+course_id - INT - Foreign Key, NOT NULL
+admission_date - DATE - DEFAULT CURRENT_DATE
+student_status - VARCHAR(20) - DEFAULT 'Active', CHECK
+
+Foreign Key:
+course_id references courses(course_id).
+
+Validation:
+Age must be at least 16 when provided.
+Student status must be Active, Inactive or Graduated.
+Email addresses must be unique.
+Non-null phone numbers must be unique.
+
+TABLE 4: SUBJECTS
+
+Purpose:
+Stores subject information associated with courses.
+
+Columns and Constraints:
+
+subject_id - INT - Primary Key, Auto Increment
+subject_name - VARCHAR(100) - NOT NULL
+subject_code - VARCHAR(20) - NOT NULL, UNIQUE
+course_id - INT - Foreign Key, NOT NULL
+
+Foreign Key:
+course_id references courses(course_id).
+
+TABLE 5: MARKS
+
+Purpose:
+Stores examination marks obtained by students in different subjects.
+
+Columns and Constraints:
+
+mark_id - INT - Primary Key, Auto Increment
+student_id - INT - Foreign Key, NOT NULL
+subject_id - INT - Foreign Key, NOT NULL
+exam_type - VARCHAR(30) - NOT NULL
+marks_obtained - DECIMAL(5,2) - NOT NULL, CHECK
+exam_date - DATE - NULL Allowed
+
+Foreign Keys:
+student_id references students(student_id).
+subject_id references subjects(subject_id).
+
+Additional Constraints:
+Marks must be between 0 and 100.
+The combination of student_id, subject_id and exam_type must be unique.
+
+TABLE 6: ATTENDANCE
+
+Purpose:
+Stores daily attendance records for students.
+
+Columns and Constraints:
+
+attendance_id - INT - Primary Key, Auto Increment
+student_id - INT - Foreign Key, NOT NULL
+attendance_date - DATE - NOT NULL
+attendance_status - VARCHAR(10) - NOT NULL, CHECK
+
+Foreign Key:
+student_id references students(student_id).
+
+Additional Constraints:
+Attendance status must be Present, Absent or Late.
+The combination of student_id and attendance_date must be unique.
+
+4. DATABASE RELATIONSHIPS
+
+Parent Table: departments
+Child Table: courses
+Relationship: One-to-Many
+
+Parent Table: courses
+Child Table: students
+Relationship: One-to-Many
+
+Parent Table: courses
+Child Table: subjects
+Relationship: One-to-Many
+
+Parent Table: students
+Child Table: marks
+Relationship: One-to-Many
+
+Parent Table: subjects
+Child Table: marks
+Relationship: One-to-Many
+
+Parent Table: students
+Child Table: attendance
+Relationship: One-to-Many
+
+The relationships allow the database to connect departments with courses, courses with students and subjects, and students with their examination and attendance records.
+
+The marks table connects students and subjects through examination records.
+
+5. PRIMARY KEYS AND FOREIGN KEYS
+
+PRIMARY KEYS:
+
+departments - department_id
+courses - course_id
+students - student_id
+subjects - subject_id
+marks - mark_id
+attendance - attendance_id
+
+FOREIGN KEYS:
+
+courses - department_id
+students - course_id
+subjects - course_id
+marks - student_id
+marks - subject_id
+attendance - student_id
+
+The database contains six foreign-key constraints connecting the six core tables.
+
+These relationships help prevent invalid references between records.
+
+6. DATABASE NORMALIZATION
+
+The database is designed using normalization principles.
+
+FIRST NORMAL FORM (1NF):
+
+Each table contains atomic values, and repeating groups are avoided. Every table has a primary key to identify its records.
+
+SECOND NORMAL FORM (2NF):
+
+The core tables use single-column primary keys, and non-key attributes are maintained with the appropriate table key. No partial dependencies are intended in the design.
+
+THIRD NORMAL FORM (3NF):
+
+Department, course, student, subject, marks and attendance information are maintained in separate tables to reduce unnecessary data duplication.
+
+For example, department information is stored in the departments table instead of being repeatedly stored in student records.
+
+The design is intended to follow 3NF based on the project's stated relationships and business rules.
+
+7. DATABASE CONSTRAINTS
+
+The following constraints are implemented:
+
+PRIMARY KEY:
+Uniquely identifies each record.
+
+FOREIGN KEY:
+Establishes relationships between tables.
+
+UNIQUE:
+Prevents duplicate values in selected columns.
+
+NOT NULL:
+Ensures mandatory fields contain values.
+
+DEFAULT:
+Assigns predefined values when appropriate.
+
+CHECK:
+Validates values based on specified conditions.
+
+AUTO_INCREMENT:
+Automatically generates numeric identifiers.
+
+These constraints help maintain data accuracy and consistency.
+
+8. DATABASE OPERATIONS
+
+The system supports:
+
+1. Managing department information.
+2. Managing course information.
+3. Registering and managing student records.
+4. Managing subject information.
+5. Recording examination marks.
+6. Recording student attendance.
+7. Retrieving student details.
+8. Updating student information.
+9. Analysing student academic performance.
+10. Generating attendance reports.
+11. Generating department-wise and course-wise reports.
+12. Generating student performance reports.
+
+9. ADVANCED DATABASE FEATURES
+
+VIEWS:
+
+Simplify frequently used queries and reports. The project includes student-course, student-marks and active-student views.
+
+STORED PROCEDURES:
+
+Perform reusable database operations such as displaying all students, retrieving student details using student ID and retrieving students based on course ID.
+
+STORED FUNCTIONS:
+
+Return calculated values such as student grades and average marks.
+
+TRIGGERS:
+
+Automatically record marks insertion and update operations in the marks_audit table.
+
+INDEXES:
+
+Support efficient searching, filtering and reporting using single-column and composite indexes.
+
+TRANSACTIONS:
+
+Help maintain database consistency through COMMIT, ROLLBACK and SAVEPOINT operations.
+
+10. DATA INTEGRITY
+
+The database uses primary keys, foreign keys, unique constraints and validation rules to maintain consistent data.
+
+Examples include:
+
+1. Preventing duplicate department names and department codes.
+2. Preventing duplicate student email addresses.
+3. Preventing invalid course references for students.
+4. Preventing invalid subject references in marks records.
+5. Restricting marks to values between 0 and 100.
+6. Restricting student status to predefined values.
+7. Restricting attendance status to Present, Absent or Late.
+8. Preventing duplicate attendance records for the same student and date.
+9. Maintaining marks audit records through triggers.
+
+11. CONCLUSION
+
+The Student Management System uses a relational database design consisting of six interconnected tables.
+
+The database is designed to manage student information, departments, courses, subjects, examination marks and attendance records.
+
+The project demonstrates database design, normalization, relationships, constraints and advanced MySQL concepts, including joins, subqueries, aggregate functions, views, stored procedures, stored functions, triggers, indexes and transactions.
+
+The system provides a structured approach to managing academic information and generating useful student performance and attendance reports.

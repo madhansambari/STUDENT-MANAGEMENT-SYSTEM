@@ -1,0 +1,752 @@
+STUDENT MANAGEMENT SYSTEM
+
+
+PROJECT REQUIREMENTS DOCUMENT
+
+**Database:** `student_management_system`  
+**Database Management System:** MySQL 8.0  
+**Database Tool:** MySQL Workbench  
+**Project Type:** SQL Database Management Project
+
+---
+
+# 1. PROJECT INTRODUCTION
+
+The Student Management System is a relational database project developed using MySQL. It is designed to organize and maintain academic information about departments, courses, students, subjects, examination marks and student attendance.
+
+The database provides a centralized structure for storing related academic records and retrieving useful information through SQL queries and reports.
+
+# 2. PROBLEM STATEMENT
+
+Educational institutions need to maintain student details, course enrolments, subject information, examination results and attendance records.
+
+When these records are maintained separately or manually, it can become difficult to find information, avoid duplicate data, connect students with their courses and subjects, and prepare academic reports.
+
+Some common problems include:
+
+- Student information being repeated across separate records.
+- Difficulty finding students enrolled in a particular course.
+- Difficulty summarizing examination marks.
+- Difficulty reviewing student attendance.
+- Time-consuming preparation of department-wise and course-wise reports.
+
+The Student Management System addresses these problems by organizing academic information in a relational MySQL database.
+
+# 3. PROJECT OBJECTIVES
+
+The main objectives of this project are:
+
+1. Store and manage student information in a structured database.
+2. Maintain department and course details.
+3. Associate courses with departments and students with courses.
+4. Maintain subject details for each course.
+5. Record examination marks for students and subjects.
+6. Record daily attendance for each student.
+7. Retrieve information using basic SQL queries.
+8. Analyse data using aggregate functions, GROUP BY and HAVING.
+9. Combine related information using joins and subqueries.
+10. Create reusable views, stored procedures and stored functions.
+11. Use triggers to maintain audit records when marks are inserted or updated.
+12. Demonstrate transaction control, indexes and query-plan analysis.
+13. Generate academic and management reports.
+
+# 4. SCOPE OF THE PROJECT
+
+The current implementation is a database-focused project executed using MySQL Workbench.
+
+It includes six core relational tables and SQL scripts for:
+
+- Database creation.
+- Table creation.
+- Sample data insertion.
+- Basic and advanced SQL queries.
+- Aggregate functions.
+- Joins and subqueries.
+- Views.
+- Stored procedures.
+- Stored functions.
+- Triggers.
+- Transactions.
+- Indexes and query optimization.
+- Student performance and attendance reports.
+
+A Python application, web interface, login system and live institutional integration are not included in the current implementation. These can be considered future enhancements.
+
+# 5. TECHNOLOGIES USED
+
+| Component | Technology |
+|---|---|
+| Database Management System | MySQL 8.0 |
+| Database Tool | MySQL Workbench |
+| Query Language | SQL |
+| Database Model | Relational Database |
+| Operating System | Windows |
+| Documentation | Microsoft Word / Markdown |
+
+# 6. FUNCTIONAL REQUIREMENTS
+
+## FR01 – Department Management
+
+The system shall store department names, unique department codes and office locations.
+
+It shall support:
+
+- Storing department details.
+- Retrieving department information.
+- Associating courses with departments.
+- Preventing duplicate department names and codes.
+
+## FR02 – Course Management
+
+The system shall store course information.
+
+It shall support:
+
+- Storing course names.
+- Maintaining course fees.
+- Associating courses with departments.
+- Retrieving course details.
+- Validating course fees.
+
+## FR03 – Student Management
+
+The system shall maintain student information.
+
+It shall support:
+
+- Storing student first name and last name.
+- Maintaining age and gender.
+- Storing phone numbers and email addresses.
+- Associating students with courses.
+- Recording admission dates.
+- Maintaining student status.
+- Preventing duplicate email addresses and non-null phone numbers.
+
+Supported student statuses:
+
+- Active
+- Inactive
+- Graduated
+
+## FR04 – Subject Management
+
+The system shall maintain subject information.
+
+It shall support:
+
+- Storing subject names.
+- Maintaining unique subject codes.
+- Associating subjects with courses.
+- Retrieving subject details.
+
+## FR05 – Marks Management
+
+The system shall maintain examination marks for students.
+
+It shall support:
+
+- Recording student examination marks.
+- Associating marks with subjects.
+- Recording exam types.
+- Maintaining examination dates.
+- Retrieving student marks.
+- Validating marks between 0 and 100.
+- Preventing duplicate records for the same student, subject and exam type.
+
+## FR06 – Attendance Management
+
+The system shall maintain daily student attendance records.
+
+It shall support:
+
+- Recording attendance dates.
+- Recording attendance status.
+- Retrieving student attendance.
+- Generating attendance summaries.
+- Preventing duplicate attendance records for the same student on the same date.
+
+Supported attendance statuses:
+
+- Present
+- Absent
+- Late
+
+## FR07 – Data Retrieval and Search
+
+The system shall support SQL queries using:
+
+- SELECT
+- WHERE
+- DISTINCT
+- ORDER BY
+- LIMIT
+- OFFSET
+- LIKE
+- BETWEEN
+- IN
+- NOT IN
+- IS NULL
+- IS NOT NULL
+- AND
+- OR
+- NOT
+
+## FR08 – Academic Analysis
+
+The system shall support aggregate functions and grouping operations, including:
+
+- COUNT()
+- SUM()
+- AVG()
+- MIN()
+- MAX()
+- GROUP BY
+- HAVING
+
+These operations help analyse student records, marks and attendance.
+
+## FR09 – Relationship-Based Queries
+
+The system shall use:
+
+- INNER JOIN
+- LEFT JOIN
+- RIGHT JOIN
+- SELF JOIN
+- Subqueries
+- Correlated subqueries
+- EXISTS
+- NOT EXISTS
+
+These operations help retrieve related academic information from multiple tables.
+
+## FR10 – Advanced SQL Features
+
+The project shall demonstrate:
+
+- CASE
+- COALESCE
+- UNION
+- UNION ALL
+- Views
+- Stored procedures
+- Stored functions
+- Triggers
+- Indexes
+- Transactions
+
+## FR11 – Academic and Management Reports
+
+The system shall generate reports including:
+
+1. Total number of students.
+2. Total number of courses.
+3. Total number of departments.
+4. Student count by status.
+5. Course-wise student count.
+6. Department-wise student count.
+7. Course fee listing.
+8. Top five students based on average marks.
+9. Highest marks.
+10. Lowest marks.
+11. Second-highest marks.
+12. Subject-wise average marks.
+13. Student performance categories.
+14. Student-wise attendance summary.
+15. Attendance percentage.
+16. Monthly examination report.
+17. Monthly attendance report.
+18. Combined student, course and department report.
+
+## FR12 – Marks Audit
+
+The system shall demonstrate triggers that automatically record marks-related changes.
+
+The audit information includes:
+
+- Audit ID.
+- Mark ID.
+- Student ID.
+- Action type.
+- Old marks.
+- New marks.
+- Action date and time.
+
+# 7. NON-FUNCTIONAL REQUIREMENTS
+
+## NFR01 – Data Integrity
+
+The database shall use primary keys, foreign keys, unique constraints, NOT NULL constraints and CHECK constraints to maintain valid and consistent records.
+
+## NFR02 – Performance
+
+Indexes shall be created on selected columns to support efficient searching and reporting.
+
+Query execution plans shall be inspected using EXPLAIN.
+
+## NFR03 – Reliability
+
+Transactions shall demonstrate COMMIT, ROLLBACK and SAVEPOINT to maintain consistency during database operations.
+
+## NFR04 – Maintainability
+
+SQL scripts shall be organized into separate files for database creation, table creation, sample data, queries, views, procedures, functions, triggers, indexes, transactions and reports.
+
+## NFR05 – Scalability
+
+The relational database structure shall support increasing numbers of students, courses, marks and attendance records.
+
+## NFR06 – Usability
+
+SQL scripts shall be organized and documented so they can be executed and understood using MySQL Workbench.
+
+## NFR07 – Security
+
+Production use would require appropriate database permissions, secure credentials, backups and access controls. These features are not fully implemented in the current SQL-only project.
+
+# 8. DATABASE REQUIREMENTS AND TABLE DESIGN
+
+The database name is:
+
+`student_management_system`
+
+The database contains six core tables.
+
+## 8.1 Departments Table
+
+**Table Name:** `departments`
+
+**Purpose:** Stores department information.
+
+Main columns:
+
+- department_id – Primary Key
+- department_name – Department name
+- department_code – Unique department code
+- office_location – Department location
+
+## 8.2 Courses Table
+
+**Table Name:** `courses`
+
+**Purpose:** Stores course information.
+
+Main columns:
+
+- course_id – Primary Key
+- course_name – Course name
+- course_fee – Course fee
+- department_id – Foreign Key
+
+## 8.3 Students Table
+
+**Table Name:** `students`
+
+**Purpose:** Stores student personal and academic information.
+
+Main columns:
+
+- student_id – Primary Key
+- first_name – Student first name
+- last_name – Student last name
+- age – Student age
+- gender – Student gender
+- phone – Student phone number
+- email – Student email address
+- course_id – Foreign Key
+- admission_date – Admission date
+- student_status – Student status
+
+## 8.4 Subjects Table
+
+**Table Name:** `subjects`
+
+**Purpose:** Stores subject information for each course.
+
+Main columns:
+
+- subject_id – Primary Key
+- subject_name – Subject name
+- subject_code – Unique subject code
+- course_id – Foreign Key
+
+## 8.5 Marks Table
+
+**Table Name:** `marks`
+
+**Purpose:** Stores examination marks obtained by students.
+
+Main columns:
+
+- mark_id – Primary Key
+- student_id – Foreign Key
+- subject_id – Foreign Key
+- exam_type – Examination type
+- marks_obtained – Marks obtained
+- exam_date – Examination date
+
+## 8.6 Attendance Table
+
+**Table Name:** `attendance`
+
+**Purpose:** Stores daily attendance information.
+
+Main columns:
+
+- attendance_id – Primary Key
+- student_id – Foreign Key
+- attendance_date – Attendance date
+- attendance_status – Present, Absent or Late
+
+# 9. DATABASE RELATIONSHIPS
+
+The database uses the following relationships:
+
+1. Departments to Courses – One department can have many courses.
+2. Courses to Students – One course can have many students.
+3. Courses to Subjects – One course can have many subjects.
+4. Students to Marks – One student can have multiple marks records.
+5. Subjects to Marks – One subject can have multiple marks records.
+6. Students to Attendance – One student can have multiple attendance records.
+
+The marks table records the relationship between students and subjects for particular examination types.
+
+## ER Diagram – Text Representation
+
+```text
+DEPARTMENTS
+     |
+     | 1 : Many
+     |
+   COURSES
+     |
+     |----------------------|
+     |                      |
+     | 1 : Many             | 1 : Many
+     |                      |
+  STUDENTS               SUBJECTS
+     |                      |
+     |                      |
+     | 1 : Many             | 1 : Many
+     |                      |
+   MARKS -------------------|
+     |
+     |
+   STUDENTS
+     |
+     | 1 : Many
+     |
+ ATTENDANCE
+```
+
+# 10. DATABASE CONSTRAINTS
+
+The project uses the following database constraints:
+
+**PRIMARY KEY:** Uniquely identifies each record in a table.
+
+**FOREIGN KEY:** Establishes relationships between related tables.
+
+**UNIQUE:** Prevents duplicate values in selected columns.
+
+**NOT NULL:** Ensures mandatory fields contain values.
+
+**DEFAULT:** Assigns default values when a value is not supplied.
+
+**CHECK:** Validates values based on specified conditions.
+
+**AUTO_INCREMENT:** Generates unique numeric identifiers automatically.
+
+These constraints help maintain data accuracy and consistency.
+
+# 11. SAMPLE DATA REQUIREMENTS
+
+The project includes the following initial sample records:
+
+| Table | Number of Records |
+|---|---:|
+| Departments | 4 |
+| Courses | 10 |
+| Students | 10 |
+| Subjects | 10 |
+| Marks | 20 |
+| Attendance | 20 |
+| Total | 74 |
+
+The trigger demonstration inserts one additional marks record and updates it. Therefore, the marks table contains 21 records after that demonstration.
+
+The marks_audit table records the insert and update actions.
+
+The sample data is intended for learning and demonstration purposes.
+
+# 12. SQL CONCEPTS IMPLEMENTED
+
+## 12.1 Basic SQL Queries
+
+- SELECT
+- WHERE
+- DISTINCT
+- ORDER BY
+- LIMIT
+- OFFSET
+- LIKE
+- BETWEEN
+- IN
+- NOT IN
+- IS NULL
+- AND
+- OR
+- NOT
+
+## 12.2 Aggregate Functions
+
+- COUNT()
+- SUM()
+- AVG()
+- MIN()
+- MAX()
+- GROUP BY
+- HAVING
+
+## 12.3 Joins
+
+- INNER JOIN
+- LEFT JOIN
+- RIGHT JOIN
+- SELF JOIN
+
+## 12.4 Subqueries
+
+- Nested subqueries
+- Correlated subqueries
+- IN
+- EXISTS
+- NOT EXISTS
+
+## 12.5 Other SQL Operations
+
+- CASE
+- COALESCE
+- UNION
+- UNION ALL
+
+## 12.6 Views
+
+The project creates the following views:
+
+- student_course_view
+- student_marks_view
+- active_students_view
+
+Views provide reusable virtual tables based on SQL queries.
+
+## 12.7 Stored Procedures
+
+The project demonstrates:
+
+- GetAllStudents()
+- GetStudentByID()
+- GetStudentsByCourse()
+
+Stored procedures store reusable SQL operations that can be executed when required.
+
+## 12.8 Stored Functions
+
+The project demonstrates:
+
+- CalculateGrade()
+- GetStudentAverageMarks()
+
+Stored functions perform calculations and return values.
+
+## 12.9 Triggers
+
+The project demonstrates:
+
+- AfterMarksInsert
+- AfterMarksUpdate
+
+These triggers automatically insert audit records when marks are inserted or updated.
+
+## 12.10 Transactions
+
+The project demonstrates:
+
+- START TRANSACTION
+- COMMIT
+- ROLLBACK
+- SAVEPOINT
+- ROLLBACK TO SAVEPOINT
+
+## 12.11 Indexes and Query Optimization
+
+The project demonstrates:
+
+- Single-column indexes.
+- Composite indexes.
+- SHOW INDEX.
+- EXPLAIN.
+
+Indexes help improve data retrieval performance for selected queries.
+
+# 13. REPORTS TO BE GENERATED
+
+The system generates the following academic and management reports:
+
+1. Total student count.
+2. Total course count.
+3. Total department count.
+4. Student status summary.
+5. Department-wise student count.
+6. Course-wise student count.
+7. Courses with more than one student.
+8. Course fee report.
+9. Top five students based on average marks.
+10. Highest marks report.
+11. Lowest marks report.
+12. Second-highest marks report.
+13. Subject-wise average marks.
+14. Students with average marks above 85.
+15. Student performance categories.
+16. Attendance status summary.
+17. Student-wise attendance summary.
+18. Student attendance percentage.
+19. Students with attendance below 75%.
+20. Monthly examination report.
+21. Monthly attendance report.
+22. Combined student, course, department and marks report.
+
+# 14. DATABASE NORMALIZATION
+
+The database is designed using normalization principles to reduce unnecessary data duplication and maintain consistency.
+
+## First Normal Form (1NF)
+
+Each column stores individual values. Repeating groups are avoided.
+
+## Second Normal Form (2NF)
+
+Non-key attributes are stored with the key that identifies their records. The core tables use single-column primary keys.
+
+## Third Normal Form (3NF)
+
+Department and course information are maintained in separate tables rather than being repeatedly stored in student records.
+
+This structure helps reduce data redundancy and improve database consistency.
+
+# 15. TESTING REQUIREMENTS
+
+The system shall be tested to verify:
+
+1. Database creation is successful.
+2. All six core tables are created successfully.
+3. Sample records are inserted successfully.
+4. Primary keys and foreign keys work correctly.
+5. Unique constraints prevent duplicate values.
+6. CHECK constraints reject invalid values.
+7. SQL queries return the expected results.
+8. Views execute successfully.
+9. Stored procedures perform the intended operations.
+10. Stored functions return correct values.
+11. Triggers execute when their conditions are met.
+12. Audit records are generated correctly.
+13. Indexes are created successfully.
+14. EXPLAIN displays query execution plans.
+15. Transactions support COMMIT and ROLLBACK.
+16. Business reports return the expected results.
+
+# 16. PROJECT EXECUTION ORDER
+
+The SQL scripts are organized in the following execution order:
+
+| File Name | Description |
+|---|---|
+| 01_Create_Database.sql | Creates the database |
+| 02_Create_Tables.sql | Creates the six core tables |
+| 03_Insert_Data.sql | Inserts sample records |
+| 04_All_SQL_Queries.sql | Basic, aggregate, join and subquery operations |
+| 05_Views.sql | Creates and tests views |
+| 06_Stored_Procedures.sql | Creates and executes stored procedures |
+| 07_Stored_Functions.sql | Creates and tests stored functions |
+| 08_Triggers.sql | Creates and tests triggers |
+| 09_Transactions.sql | Demonstrates transaction operations |
+| 10_Indexes.sql | Creates indexes and analyses query plans |
+| 11_Business_Reports.sql | Generates academic and management reports |
+
+# 17. PROJECT FOLDER STRUCTURE
+
+```text
+Student_Management_System/
+│
+├── database/
+│   │
+│   ├── 01_Create_Database.sql
+│   ├── 02_Create_Tables.sql
+│   ├── 03_Insert_Data.sql
+│   ├── 04_All_SQL_Queries.sql
+│   ├── 05_Views.sql
+│   ├── 06_Stored_Procedures.sql
+│   ├── 07_Stored_Functions.sql
+│   ├── 08_Triggers.sql
+│   ├── 09_Transactions.sql
+│   ├── 10_Indexes.sql
+│   └── 11_Business_Reports.sql
+│
+└── documentation/
+    │
+    └── Student_Management_System_Documentation.docx
+```
+
+# 18. LIMITATIONS AND FUTURE ENHANCEMENTS
+
+## Current Limitations
+
+- The project is currently implemented as a MySQL database.
+- The sample dataset is intended for demonstration.
+- A Python application or web interface is not included.
+- The database stores student age rather than date of birth.
+- Attendance calculations follow the sample project's rule that only Present is counted as attended.
+
+## Future Enhancements
+
+The project can be extended with:
+
+1. Python and MySQL integration.
+2. A web-based user interface.
+3. Student and administrator login.
+4. Role-based access control.
+5. Semester and academic-year management.
+6. Fee-payment tracking.
+7. Examination scheduling.
+8. Power BI reporting dashboards.
+9. Automated attendance reports.
+10. Advanced student performance analytics.
+
+These are proposed enhancements and are not part of the current implementation.
+
+# 19. EXPECTED OUTCOME
+
+After successful implementation, the project provides:
+
+- A centralized relational database.
+- Organized student information.
+- Department and course management.
+- Subject management.
+- Examination marks management.
+- Attendance management.
+- Academic performance analysis.
+- Reusable SQL operations.
+- Automated marks audit records.
+- Transaction management.
+- Query optimization using indexes.
+- Academic and management reporting.
+
+# 20. CONCLUSION
+
+The Student Management System demonstrates how a relational database can organize academic information and support student-related reporting.
+
+The project uses MySQL to manage student, department, course, subject, marks and attendance information.
+
+By implementing primary keys, foreign keys, constraints, joins, subqueries, aggregate functions, views, stored procedures, stored functions, triggers, transactions and indexes, the project provides practical experience in SQL and relational database management.
+
+The completed project serves as a practical demonstration of MySQL database development and management.
